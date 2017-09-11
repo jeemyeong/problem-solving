@@ -15,8 +15,12 @@ class Advertisement {
             char cur = sentence.charAt(i);
             if (isLowerCase(cur)) {
                 count[(int)cur - (int)'a']++;
-            } else if (isUpperCase(cur)) {
-                answer += cur;
+            }
+        }
+        for (int i = 0; i < length; i++) {
+            char cur = sentence.charAt(i);
+            if (isLowerCase(cur)) {
+                count[(int)cur - (int)'a']++;
             }
         }
         System.out.println(Arrays.toString(count));
