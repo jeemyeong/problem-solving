@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/11781
+
 INF = 1e100
 def solve(distance, late, N, S, E):
     import heapq
