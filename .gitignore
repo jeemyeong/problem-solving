@@ -1,3 +1,4 @@
 *.class
 .vscode
 kakao-blind-1st
+.DS_Store
