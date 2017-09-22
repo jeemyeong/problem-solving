@@ -42,6 +42,7 @@ class AttachNumber {
         int minNumber = Collections.min(result);
         int maxNumber = Collections.max(result);
         System.out.println(minNumber + maxNumber);
+        scan.close();
     }
 }
     
