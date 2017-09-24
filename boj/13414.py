@@ -1,23 +1,13 @@
-# NOT solved
-
 def solve(K, L, students):
-    last_k = set()
-    q = []
-    for student in students:
-        q.append(student)
-        if student in last_k:
-            continue
-        if len(last_k) < K:
-            last_k.add(student)
-            continue
-        while len(last_k) == K:
-            polled = q.pop(0)
-            if polled in last_k:
-                last_k.remove(polled)
-        last_k.add(student)
-    print(last_k)
-    print(q)
-    return -1
+    student_index_by_id = dict([(student, 0) for student in students])
+    for i, student in enumerate(students):
+        student_index_by_id[student] = i
+
+    student_id_by_index = dict()
+    for student_id in student_index_by_id:
+        student_id_by_index[student_index_by_id[student_id]] = student_id
+    ret = "\n".join([student_id_by_index[student_id] for student_id in sorted(student_id_by_index)][:K])
+    return ret
 
 def run():
     import sys
