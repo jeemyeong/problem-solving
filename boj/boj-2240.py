@@ -1,25 +1,29 @@
 # Not solved
 def solve(T, W, order):
-    from collections import deque
-    q = deque([])
-    q.append((0, 1, W, 1 if 1 == order[0] else 0))
-    q.append((0, 2, W, 1 if 2 == order[0] else 0))
-    ret = 0
+    import heapq
+    q = []
+    heapq.heappush(q, (W, 1 if 1 == order[0] else 0, 0, 1))
+    heapq.heappush(q, (W, 1 if 2 == order[0] else 0, 0, 2))
+    dp = [[[0]*2 for _ in range(W+1)] for _ in range(T)]
     while q:
-        index, position, left_w, count = q.popleft()
-        if count > ret:
-            ret = count
+        left_w, count, index, position = heapq.heappop(q)
+        if count < dp[index][left_w][position-1]:
+            continue
+        dp[index][left_w][position-1] = count
         if index == T-1:
             continue
         if position == 1:
-            q.append((index+1, 1, left_w, count + (1 if order[index+1] == 1 else 0)))
+            heapq.heappush(q, (left_w, count + (1 if order[index+1] == 1 else 0), index+1, 1))
             if left_w > 0:
-                q.append((index+1, 2, left_w-1, count + (1 if order[index+1] == 2 else 0)))
+                heapq.heappush(q, (left_w-1, count + (1 if order[index+1] == 2 else 0), index+1, 2))
         if position == 2:
-            q.append((index+1, 2, left_w, count + (1 if order[index+1] == 2 else 0)))
+            heapq.heappush(q, (left_w, count + (1 if order[index+1] == 2 else 0), index+1, 2))
             if left_w > 0:
-                q.append((index+1, 1, left_w-1, count + (1 if order[index+1] == 1 else 0)))
-    return ret
+                heapq.heappush(q, (left_w-1, count + (1 if order[index+1] == 1 else 0), index+1, 1))
+    # for i in dp:
+    #     print(i)
+    # print()
+    return max(max(dp[T-1], key=lambda x: max(x)))
 
 def run():
     import sys
