@@ -15,13 +15,5 @@ def run():
     read = sys.stdin.readline
     str_binary = (read().replace("\n", ""))
     print(solve(str_binary))
-    # print(solve("1111001100") == '1714')
-    # print(solve("11001100") == '314')
-    # print(solve("111001100") == '714')
-    # print(solve("1") == '1')
-    # print(solve("0") == '0')
-    # print(solve("10") == '2')
-    # print(solve("110") == '6')
-    # print(solve("100") == '4')
 
 run()
