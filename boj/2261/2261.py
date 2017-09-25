@@ -18,6 +18,8 @@ def recursive_solve(points, start, end):
         for j in range(i+1, i+6):
             if j >= len(center):
                 break
+            if center[i][1] - center[j][1] >= d:
+                break
             d = min(d, dist(center[i], center[j]))
     return d
 
