@@ -63,10 +63,7 @@ public class CloestPair {
         });
         int centerSize = center.size();
         for (i = 0; i < centerSize-1; i++) {
-            for (j = i+1; j < i+6; j++) {
-                if (j >= centerSize) {
-                    break;
-                }
+            for (j = i+1; j < i+6 && j < centerSize; j++) {
                 d = Math.min(d, dist(center.get(i), center.get(j)));
             }
         }
