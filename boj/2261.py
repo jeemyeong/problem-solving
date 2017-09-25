@@ -8,17 +8,15 @@ def recursive_solve(points, start, end):
     mid = (start+end)//2
     d = min(recursive_solve(points, start, mid), recursive_solve(points, mid +1, end))
     i = mid
-    while i <= end and (points[mid][0] - points[i][0])**2<d:
+    while i <= end and (points[mid][0] - points[i][0])**2 < d:
         i += 1
     j = mid
     while j >= start and (points[mid][0] - points[j][0])**2 < d:
         j -= 1
-    center = sorted(points[j+1:i], key=lambda x : x[1])
+    center = sorted(points[j+1:i], key=lambda x: x[1])
     for i in range(len(center)-1):
-        for j in range(i+1, i+7):
+        for j in range(i+1, i+6):
             if j >= len(center):
-                break
-            if center[j][1] - center[j][1] >= d:
                 break
             d = min(d, dist(center[i], center[j]))
     return d
