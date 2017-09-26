@@ -1,19 +1,19 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 
-public class CloestPair {
+public class CP {
     public static int INF = 987654321;
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("output.txt"));
         StringTokenizer st;
 
         int n = Integer.parseInt(br.readLine());
@@ -30,7 +30,7 @@ public class CloestPair {
                 return point1.x - point2.x;
             }
         });
-        bw.write(solve(points, 0, n-1) + "\n");
+        bw.write(Integer.toString(solve(points, 0, n-1)));
 
         br.close();
         bw.flush();
