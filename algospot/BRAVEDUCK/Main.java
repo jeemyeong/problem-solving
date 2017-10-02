@@ -63,13 +63,13 @@ public class Main {
         if (from.edges.isEmpty() || to.edges.isEmpty()) {
             return "NO";
         }
-        // PriorityQueue<Point> q = new PriorityQueue<Point>(new Comparator<Point>(){
-        //     @Override
-        //     public int compare(Point p1, Point p2) {
-        //         return p1.d - p2.d;
-        //     }
-        // });
-        Queue<Point> q = new LinkedList<Point>();
+        PriorityQueue<Point> q = new PriorityQueue<Point>(new Comparator<Point>(){
+            @Override
+            public int compare(Point p1, Point p2) {
+                return p1.d - p2.d;
+            }
+        });
+        // Queue<Point> q = new LinkedList<Point>();
         q.add(from);
         while (!q.isEmpty()) {
             Point cur = q.poll();
