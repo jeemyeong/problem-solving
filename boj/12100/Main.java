@@ -32,15 +32,16 @@ public class Main {
         q.add(map);
         for (int t = 0; t <= 5; t++) {
             int cnt = q.size();
+            // System.out.println(cnt);
             for (int j = 0; j < cnt; j++) {
                 map = q.poll();
+                // System.out.println(Arrays.deepToString(map));
                 ret = Math.max(ret, max(map));
                 if (t >= 5) {
                     continue;
                 }
                 int[][] movedMap;
                 boolean[][] mergedMap;
-                boolean moved;
 
                 mergedMap = new boolean[n][n];
                 movedMap = copyMap(map);
@@ -57,6 +58,7 @@ public class Main {
                                 movedMap[k-1][x] += movedMap[k][x];
                                 movedMap[k][x] = 0;
                                 mergedMap[k-1][x] = true;
+                                merged = true;
                             } else {
                                 break;
                             }
@@ -93,6 +95,7 @@ public class Main {
                 movedMap = copyMap(map);
                 for (int y = 0; y < n; y++) {
                     for (int x = 1; x < n; x++) {
+                        boolean merged = false;
                         for (int k = x; k > 0; k--) {
                             if (movedMap[y][k] == 0 || mergedMap[y][k-1]) {
                                 break;
@@ -103,6 +106,7 @@ public class Main {
                                 movedMap[y][k-1] += movedMap[y][k];
                                 movedMap[y][k] = 0;
                                 mergedMap[y][k-1] = true;
+                                merged = true;
                             } else {
                                 break;
                             }
@@ -115,6 +119,7 @@ public class Main {
                 movedMap = copyMap(map);
                 for (int y = 0; y < n; y++) {
                     for (int x = n-2; x >= 0; x--) {
+                        boolean merged = false;
                         for (int k = x; k < n-1; k++) {
                             if (movedMap[y][k] == 0 || mergedMap[y][k+1]) {
                                 break;
@@ -125,6 +130,7 @@ public class Main {
                                 movedMap[y][k+1] += movedMap[y][k];
                                 movedMap[y][k] = 0;
                                 mergedMap[y][k+1] = true;
+                                merged = true;
                             } else {
                                 break;
                             }
