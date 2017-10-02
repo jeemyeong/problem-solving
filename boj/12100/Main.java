@@ -42,7 +42,9 @@ public class Main {
                 }
                 int[][] movedMap;
                 boolean[][] mergedMap;
+                boolean moved;
 
+                moved = false;
                 mergedMap = new boolean[n][n];
                 movedMap = copyMap(map);
                 for (int y = 1; y < n; y++) {
@@ -59,14 +61,18 @@ public class Main {
                                 movedMap[k][x] = 0;
                                 mergedMap[k-1][x] = true;
                                 merged = true;
+                                moved = true;
                             } else {
                                 break;
                             }
                         }
                     }
                 }
-                q.add(movedMap);
+                if (moved) {
+                    q.add(movedMap);
+                }
 
+                moved = false;
                 mergedMap = new boolean[n][n];
                 movedMap = copyMap(map);
                 for (int y = n-2; y >= 0; y--) {
@@ -83,14 +89,18 @@ public class Main {
                                 movedMap[k][x] = 0;
                                 mergedMap[k+1][x] = true;
                                 merged = true;
+                                moved = true;
                             } else {
                                 break;
                             }
                         }
                     }
                 }
-                q.add(movedMap);
+                if (moved) {
+                    q.add(movedMap);
+                }
 
+                moved = false;
                 mergedMap = new boolean[n][n];
                 movedMap = copyMap(map);
                 for (int y = 0; y < n; y++) {
@@ -107,14 +117,18 @@ public class Main {
                                 movedMap[y][k] = 0;
                                 mergedMap[y][k-1] = true;
                                 merged = true;
+                                moved = true;
                             } else {
                                 break;
                             }
                         }
                     }
                 }
-                q.add(movedMap);
+                if (moved) {
+                    q.add(movedMap);
+                }
 
+                moved = false;
                 mergedMap = new boolean[n][n];
                 movedMap = copyMap(map);
                 for (int y = 0; y < n; y++) {
@@ -131,13 +145,16 @@ public class Main {
                                 movedMap[y][k] = 0;
                                 mergedMap[y][k+1] = true;
                                 merged = true;
+                                moved = true;
                             } else {
                                 break;
                             }
                         }
                     }
                 }
-                q.add(movedMap);
+                if (moved) {
+                    q.add(movedMap);
+                }
             }
         }
         return ret;
