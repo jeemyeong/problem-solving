@@ -50,7 +50,7 @@ public class Main {
                 dir.turnLeft();
                 Point nextPoint = new Point(cur.y+dir.y, cur.x+dir.x);
                 
-                if (nextPoint.y < 0 || nextPoint.x < 0 || nextPoint.y >= n || nextPoint.x >= n) {
+                if (nextPoint.y < 0 || nextPoint.x < 0 || nextPoint.y >= n || nextPoint.x >= m) {
                     continue;
                 }
                 if (map[nextPoint.y][nextPoint.x] == 0 && cleaned[nextPoint.y][nextPoint.x] == 0) {
