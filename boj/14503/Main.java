@@ -35,7 +35,6 @@ public class Main {
     static int solve(int n, int m, int r, int c, int d, int[][] map) {
         Point cur = new Point(r, c);
         Direction dir = new Direction(d);
-        int[][] directions = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
         int[][] cleaned = new int[n][m];
         int ret = 0;
         int cnt = 0;
