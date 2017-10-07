@@ -1,5 +1,3 @@
-# Not solved
-
 import sys
 # import heapq, collections
 
@@ -17,21 +15,12 @@ def F(): return float(sys.stdin.readline())
 def S(): return input()
 
 def solve(n, numbers):
+    merged = set(numbers[0]) | set(numbers[1])
     ret = 0
-    dn = n
-    w = 1
-    print(3 ^ 6)
-    print(4 ^ 6)
-    print(4 ^ 3)
-    for i in range(2*n):
-        for j in range(2*n):
-            print(bin(i)[2:],bin(j)[2:],bin(i^j)[2:], i^j>2*n)
-            print(i^(2*n), j^(2*n))
-    # for i in range(n):
-    #     if numbers[0]
-    # for j in range(n):
-    #         if numbers[0][i] ^ numbers[1][j] <= 2*n:
-    #             ret += 1
+    for i in range(n):
+        for j in range(n):
+            if numbers[0][i] ^ numbers[1][j] in merged:
+                ret += 1
     if ret % 2 == 0:
         return "Karen"
     else:
