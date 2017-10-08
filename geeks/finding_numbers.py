@@ -14,21 +14,24 @@ def I(): return int(sys.stdin.readline())
 def F(): return float(sys.stdin.readline())
 def S(): return input()
 
-def solve(n, numbers):
-    merged = set(numbers[0]) | set(numbers[1])
-    ret = 0
-    for i in range(n):
-        for j in range(n):
-            if numbers[0][i] ^ numbers[1][j] in merged:
-                ret += 1
-    if ret % 2 == 0:
-        return "Karen"
-    else:
-        return "Koyomi"
+def solve(n, seq):
+    hash_table = {}
+    for i, e in enumerate(seq):
+        if e not in hash_table:
+            hash_table[e] = 1
+        else:
+            hash_table[e] += 1
+    ret = []
+    for i in hash_table:
+        if hash_table[i]%2 == 1:
+            ret.append(i)
+    return " ".join(map(str, sorted(ret)))
 
-def run():
-    n = I()
-    numbers = [LI() for _ in range(2)]
-    print(solve(n, numbers))
+def main():
+    t = I()
+    for _ in range(t):
+        n = I()
+        seq = LI()
+        print(solve(n, seq))
 
-run()
+main()

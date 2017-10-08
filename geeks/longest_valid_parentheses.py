@@ -14,21 +14,25 @@ def I(): return int(sys.stdin.readline())
 def F(): return float(sys.stdin.readline())
 def S(): return input()
 
-def solve(n, numbers):
-    merged = set(numbers[0]) | set(numbers[1])
+def solve(parenthesis):
+    stack = []
+    cur = 0
     ret = 0
-    for i in range(n):
-        for j in range(n):
-            if numbers[0][i] ^ numbers[1][j] in merged:
-                ret += 1
-    if ret % 2 == 0:
-        return "Karen"
-    else:
-        return "Koyomi"
+    for i, e in enumerate(parenthesis):
+        if e == '(':
+            stack.append(cur)
+            cur = 0
+        elif e == ')' and len(stack) > 0:
+            cur += stack.pop() + 2
+            ret = max(ret, cur)
+        elif e == ')' and len(stack) == 0:
+            cur = 0
+    return ret
 
-def run():
+def main():
     n = I()
-    numbers = [LI() for _ in range(2)]
-    print(solve(n, numbers))
+    for _ in range(n):
+        parenthesis = S()
+        print(solve(parenthesis))
 
-run()
+main()
