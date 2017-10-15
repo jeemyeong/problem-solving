@@ -1,8 +1,7 @@
 *.class
 .vscode
 kakao-blind-1st
-kakao-blind-2nd-ts
-kakao-blind-2nd-python
+kakao-blind-2nd
 .DS_Store
 nhn-pretest-1st
 lg-code-monster
