@@ -16,16 +16,20 @@ def S(): return input()
 
 
 def solve(n):
-    if n < 4 or n == 5 or n == 7:
+    if n < 4 or n == 5 or n == 7 or n == 11:
         return -1
     if n == 4 or n == 6:
         return 1
     ret = n // 4
     mod = n % 4
     if mod == 2 or mod == 0:
-        return ret
-    if mod == 3 or mod == 1:
-        return ret-1
+        pass
+    elif mod == 1:
+        ret = ret-1
+    elif mod == 3:
+        ret = ret-1
+    return ret
+    
 
 def main():
     q = I()
