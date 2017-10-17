@@ -11,8 +11,7 @@ function solution(A) {
         if (set.has(i)) {
             continue;
         } else {
-            console.log(i);
-            return;
+            return i;
         }
     }
 
