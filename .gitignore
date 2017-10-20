@@ -1,6 +1,9 @@
 *.class
 .vscode
 kakao-blind-1st
+kakao-blind-2nd
 .DS_Store
 nhn-pretest-1st
 lg-code-monster
+line
+samsung-swtest/swexpert/Solution.java
