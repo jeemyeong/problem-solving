@@ -1,10 +1,8 @@
 import java.util.Arrays;
-
-
 import java.util.ArrayList;
-class Advertisement {
+class Solution {
 	public static void main(String[] args) {
-		Advertisement ad = new Advertisement();
+		Solution ad = new Solution();
 		String sentence = "AxAxAxAoBoBoB";
 		String ret = ad.solution(sentence);
 		System.out.println(ret);

@@ -1,9 +1,9 @@
 import java.util.Queue;
 import java.util.LinkedList;
 
-class ColoringBook {
+class Solution {
     public static void main(String[] args) {
-        ColoringBook book = new ColoringBook();
+        Solution book = new Solution();
         int m = 6;
         int n = 4;
         int[][] picture = {{1, 1, 1, 0}, {1, 2, 2, 0}, {1, 0, 0, 1}, {0, 0, 0, 1}, {0, 0, 0, 3}, {0, 0, 0, 3}};
@@ -37,7 +37,7 @@ class ColoringBook {
                 for (int[] direction : directions) {
                     int dy = cur.y + direction[0];
                     int dx = cur.x + direction[1];
-                    if (dy < 0 || dy >= m || dx < 0 || dx >= n || visited[dy][dx]) {
+                    if (dy < 0 || dy >= m || dx < 0 || dx >= n) {
                         continue;
                     }
                     if (picture[dy][dx] == picture[cur.y][cur.x]) {
@@ -45,7 +45,6 @@ class ColoringBook {
                     } else {
                         q.offer(new Point(dy, dx));
                     }
-                    visited[dy][dx] = true;
                 }
             }
             if (picture[newCur.y][newCur.x] != 0) {

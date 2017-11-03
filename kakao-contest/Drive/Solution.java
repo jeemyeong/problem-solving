@@ -1,7 +1,7 @@
-class Drive {
+class Solution {
     int MOD = 20170805;
     public static void main(String[] args) {
-        Drive drive = new Drive();
+        Solution drive = new Solution();
         int[][] cityMap1 = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         int ret = 0;
         // ret = drive.solution(3, 3, cityMap1);
