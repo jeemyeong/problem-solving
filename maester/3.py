@@ -16,7 +16,8 @@ def get_min(arr, a, b, dp_min, dp_max):
         if operator == "-":
             item = get_min(arr, a, i-1, dp_min, dp_max) - get_max(arr, i+1, b, dp_min, dp_max)
             min_list.append(item)
-    return min(min_list)
+    dp_min[(a, b)] = min(min_list)
+    return dp_min[(a, b)]
 
 def get_max(arr, a, b, dp_min, dp_max):
     if (a, b) in dp_max:
@@ -33,7 +34,8 @@ def get_max(arr, a, b, dp_min, dp_max):
         if operator == "-":
             item = get_max(arr, a, i-1, dp_min, dp_max) - get_min(arr, i+1, b, dp_min, dp_max)
             max_list.append(item)
-    return max(max_list)
+    dp_max[(a, b)] = max(max_list)
+    return dp_max[(a, b)]
 
 def solution2(arr): #O(n!)
     n = len(arr)//2+1
