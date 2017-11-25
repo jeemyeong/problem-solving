@@ -19,11 +19,11 @@ def get_min(arr, a, b, dp_min, dp_max):
     return min(min_list)
 
 def get_max(arr, a, b, dp_min, dp_max):
-    if (a, b) in dp_min:
-        return dp_min[(a, b)]
+    if (a, b) in dp_max:
+        return dp_max[(a, b)]
     if a == b:
-        dp_min[(a, b)] = int(arr[a])
-        return dp_min[(a, b)]
+        dp_max[(a, b)] = int(arr[a])
+        return dp_max[(a, b)]
     max_list = []
     for i in range(a+1, b, 2):
         operator = arr[i]
