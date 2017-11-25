@@ -1,54 +1,41 @@
-# Not solved
+def solution(arr): #O(n^3)
+    return get_max(arr, 0, len(arr)-1, {}, {})
 
-# def solution(arr):
-#     n = len(arr)//2+1
-#     dp = [{"max": None, "min": None} for _ in range(n+1)]
-#     dp[n] = {"max": 0, "min": 0}
-#     for i in range(n-1, -1, -1):
-#         operator = arr[2*i-1]
-#         operand = int(arr[2*i])
-#         if operator == "-":
-#             nums = [-operand+dp[i+1]["max"], -operand-dp[i+1]["max"], -operand+dp[i+1]["min"], -operand-dp[i+1]["min"]]
-#             dp[i]["max"] = max(nums)
-#             dp[i]["min"] = min(nums)
-#         else:
-#             nums = [operand+dp[i+1]["max"], operand+dp[i+1]["min"]]
-#             dp[i]["max"] = max(nums)
-#             dp[i]["min"] = min(nums)
-#     return dp[0]["max"]
-
-# print(solution(["5", "-", "3", "+", "1", "+", "2", "-", "4"]))
-
-def solution1(arr):
-    n = len(arr)//2+1
-    dp = [set([]) for _ in range(n+1)]
-    dp[n] = set([0])
-    for i in range(n-1, -1, -1):
-        operator = arr[2*i-1]
-        operand = int(arr[2*i])
-        if i > 0 and operator == "-":
-            for num in dp[i+1]:
-                dp[i].add(-operand+num)
-                dp[i].add(-operand-num)
-        else:
-            for num in dp[i+1]:
-                dp[i].add(operand+num)
-    return max(dp[0])
-
-def solution(arr):
-    n = len(arr)//2+1
-    new_arr = [int(arr[0])]
-    for i in range(n-1):
-        operator = arr[2*i+1]
-        operand = int(arr[2*i+2])
+def get_min(arr, a, b, dp_min, dp_max):
+    if (a, b) in dp_min:
+        return dp_min[(a, b)]
+    if a == b:
+        dp_min[(a, b)] = int(arr[a])
+        return dp_min[(a, b)]
+    min_list = []
+    for i in range(a+1, b, 2):
+        operator = arr[i]
         if operator == "+":
-            new_arr[-1] += operand
-        else:
-            new_arr.append("-")
-            new_arr.append(operand)
-    return max(solution1(new_arr), solution1(arr))
+            item = get_min(arr, a, i-1, dp_min, dp_max) + get_min(arr, i+1, b, dp_min, dp_max)
+            min_list.append(item)
+        if operator == "-":
+            item = get_min(arr, a, i-1, dp_min, dp_max) - get_max(arr, i+1, b, dp_min, dp_max)
+            min_list.append(item)
+    return min(min_list)
 
-def solution2(arr):
+def get_max(arr, a, b, dp_min, dp_max):
+    if (a, b) in dp_min:
+        return dp_min[(a, b)]
+    if a == b:
+        dp_min[(a, b)] = int(arr[a])
+        return dp_min[(a, b)]
+    max_list = []
+    for i in range(a+1, b, 2):
+        operator = arr[i]
+        if operator == "+":
+            item = get_max(arr, a, i-1, dp_min, dp_max) + get_max(arr, i+1, b, dp_min, dp_max)
+            max_list.append(item)
+        if operator == "-":
+            item = get_max(arr, a, i-1, dp_min, dp_max) - get_min(arr, i+1, b, dp_min, dp_max)
+            max_list.append(item)
+    return max(max_list)
+
+def solution2(arr): #O(n!)
     n = len(arr)//2+1
     if n == 1:
         return int(arr[0])
@@ -67,27 +54,16 @@ def solution2(arr):
 
 def random_arr():
     import random
-
     n = random.randint(4, 5)
     arr = []
     for _ in range(n):
         arr.append(str(random.randint(1, 5)))
-        if random.randint(1,4) == 1:
+        if random.randint(1, 4) == 1:
             arr.append("+")
         else:
             arr.append("-")
     arr.pop()
     return arr
 
-# # for _ in range(100000):
-#     arr = random_arr()
-#     sol1 = (solution(arr))
-#     sol2 = (solution2(arr))
-#     if sol1 != sol2:
-#         print(arr)
-#         print(sol1)
-#         print(sol2)
-#         break
-
-print(solution(['1', '-', '4', '+', '5', '-', '1', '-', '2', '-', '3', '+', '2', '-', '3']))
-print(solution2(['1', '-', '4', '+', '5', '-', '1', '-', '2', '-', '3', '+', '2', '-', '3']))
+# print(solution(['1', '-', '4', '+', '5', '-', '1', '-', '2', '-', '3', '+', '2', '-', '3']))
+# print(solution2(['1', '-', '4', '+', '5', '-', '1', '-', '2', '-', '3', '+', '2', '-', '3']))
