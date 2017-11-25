@@ -27,7 +27,7 @@ def solution(maps):
     }
     q = deque([start])
     visited = [[False] * (max_x+1) for _ in range(max_y+1)]
-    visited[start["y"]][start["x"]] = 0
+    visited[start["y"]][start["x"]] = True
     while q:
         cur = q.popleft()
         if visited[cur["y"]][cur["x"]] is True:
