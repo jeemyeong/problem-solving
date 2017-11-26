@@ -52,11 +52,11 @@ public class Solution {
             if (visited[ny][nx]) {
                 continue;
             }
-            if (connect(map[y].charAt(x), map[ny].charAt(nx))) {
+            if (isConnected(map[y].charAt(x), map[ny].charAt(nx))) {
                 visited[ny][nx] = true;
                 ret = Math.max(ret, dfs(ny, nx, map, visited, length+1, connectedWithZ));
                 visited[ny][nx] = false;
-            } else if (!connectedWithZ && connectWithZ(map[y].charAt(x), map[ny].charAt(nx))) {
+            } else if (!connectedWithZ && isConnectedWithZ(map[y].charAt(x), map[ny].charAt(nx))) {
                 visited[ny][nx] = true;
                 ret = Math.max(ret, dfs(ny, nx, map, visited, length+1, true));
                 visited[ny][nx] = false;
@@ -65,13 +65,13 @@ public class Solution {
         return ret;
     }
 
-    boolean connectWithZ(char a, char b) {
+    boolean isConnectedWithZ(char a, char b) {
         if (a == 'Z' && b == 'A') {
             return true;
         }
         return false;
     }
-    boolean connect(char a, char b) {
+    boolean isConnected(char a, char b) {
         if (a < b) {
             return true;
         }
