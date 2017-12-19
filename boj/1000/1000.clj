@@ -1,0 +1,1 @@
+(println (apply + (map #(Integer/parseInt %) (.split (read-line) " "))))
