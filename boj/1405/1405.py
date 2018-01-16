@@ -19,25 +19,25 @@ def check(y, x, visited):
         return True
     return False
 
-def dfs(N, y, x, E_PROB, W_PROB, S_PROB, N_PROB, visited):
+def dfs(N, y, x, dirs, visited):
     if N < 0:
         return 1
     if check(y, x, visited):
         return 0
     visited[(y, x)] = True
-    ret = E_PROB * dfs(N-1, y, x-1, E_PROB, W_PROB, S_PROB, N_PROB, visited) \
-            + W_PROB * dfs(N-1, y, x+1, E_PROB, W_PROB, S_PROB, N_PROB, visited) \
-            + S_PROB * dfs(N-1, y+1, x, E_PROB, W_PROB, S_PROB, N_PROB, visited) \
-            + N_PROB * dfs(N-1, y-1, x, E_PROB, W_PROB, S_PROB, N_PROB, visited)
+    ret = 0
+    for dy, dx, PROB in dirs:
+        ret += PROB * dfs(N-1, y+dy, x+dx, dirs, visited)
     visited[(y, x)] = False
     return ret
 
-def solve(N, E_PROB, W_PROB, S_PROB, N_PROB, visited):
-    return dfs(N, 0, 0, E_PROB, W_PROB, S_PROB, N_PROB, visited) / (100 ** (N+1))
+def solve(N, dirs, visited):
+    return dfs(N, 0, 0, dirs, visited) / (100 ** (N+1))
 
 def main():
     N, E_PROB, W_PROB, S_PROB, N_PROB = LI()
+    dirs = (0, -1, E_PROB), (0, +1, W_PROB), (+1, 0, S_PROB), (-1, 0, N_PROB)
     visited = {}
-    print(solve(N, E_PROB, W_PROB, S_PROB, N_PROB, visited))
+    print(solve(N, dirs, visited))
 
 main()
