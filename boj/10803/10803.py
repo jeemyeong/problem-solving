@@ -1,4 +1,3 @@
-# Not solved
 import sys
 # import heapq, collections
 
@@ -15,32 +14,36 @@ def I(): return int(sys.stdin.readline())
 def F(): return float(sys.stdin.readline())
 def S(): return input()
 
-def solve(n, m):
-    INF = 987654321
-    dp = [[INF]*(n+1) for _ in range(m+1)]
-    dp[1][1] = 1
-    for i in range(n+1):
-        dp[0][i] = 0
-    for i in range(m+1):
-        dp[i][0] = 0
-    for y in range(1, m+1):
-        for x in range(1, n+1):
-            if (x >= 4 * y):
-                dp[y][x] = min(dp[y][x], dp[y][y-x] + 1)
-                continue
-            if y == x:
-                dp[y][x] = 1
-                continue
-            for dy in range(y+1):
-                dp[y][x] = min(dp[y][x], dp[dy][x] + dp[y-dy][x])
-            for dx in range(x+1):
-                dp[y][x] = min(dp[y][x], dp[y][dx] + dp[y][x-dx])
-    return dp[m][n]
+def solve(n, m, dp):
+    if dp[(n, m)] != inf:
+        return dp[(n, m)]
+    if n < 1 or m < 1:
+        return inf
+    if n < m:
+        return solve(m, n, dp)
+    if n == m:
+        dp[(n, m)] = 1
+        return dp[(n, m)]
+    if n % m == 0:
+        dp[(n, m)] = n // m
+        return dp[(n, m)]
+    if (n >= 3 * m):
+        dp[(n, m)] = min(dp[(n, m)], solve(n-m, m, dp) + 1)
+    else:
+        for dm in range(1, (m+1)//2+1):
+            dp[(n, m)] = min(dp[(n, m)], solve(n, dm, dp) + solve(n, m-dm, dp))
+        for dn in range(1, (n+1)//2+1):
+            dp[(n, m)] = min(dp[(n, m)], solve(dn, m, dp) + solve(n-dn, m, dp))
+    return dp[(n, m)]
 
 # print(solve(6, 5))
 
 def main():
     n, m = LI()
-    print(solve(n, m))
+    dp = {}
+    for i in range(10001):
+        for j in range(101):
+            dp[(i, j)] = inf
+    print(solve(n, m, dp))
 
 main()
