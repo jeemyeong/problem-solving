@@ -19,25 +19,45 @@ def check(y, x, visited):
         return True
     return False
 
-def dfs(N, y, x, dirs, visited):
-    if N < 0:
-        return 1
-    if check(y, x, visited):
-        return 0
-    visited[(y, x)] = True
-    ret = 0
-    for dy, dx, PROB in dirs:
-        ret += PROB * dfs(N-1, y+dy, x+dx, dirs, visited)
-    visited[(y, x)] = False
-    return ret
-
-def solve(N, dirs, visited):
-    return dfs(N, 0, 0, dirs, visited) / (100 ** (N+1))
+def solve(N, dx, dy, PROB):
+    stack = []; visited = {};
+    res = 0; y = 0; x = 0;
+    cur = {
+        "y": y,
+        "x": x,
+        "P": 1,
+        "k": 0
+    }
+    visited[(0, 0)] = True
+    stack.append(cur)
+    while stack:
+        cur_point = stack[-1]
+        if len(stack) == N+1:
+            res += cur_point["P"]
+            stack.pop()
+            visited[(cur_point["y"], cur_point["x"])] = False
+            continue
+        if cur_point["k"] == 4:
+            stack.pop()
+            visited[(cur_point["y"], cur_point["x"])] = False
+            continue
+        next_point = {
+            "y": cur_point["y"] + dy[cur_point["k"]],
+            "x": cur_point["x"] + dx[cur_point["k"]],
+            "P": cur_point["P"] * PROB[cur_point["k"]] / 100,
+            "k": 0
+        }
+        cur_point["k"] += 1
+        if check(next_point["y"], next_point["x"], visited) is False:
+            stack.append(next_point)
+            visited[(next_point["y"], next_point["x"])] = True
+    return res
 
 def main():
     N, E_PROB, W_PROB, S_PROB, N_PROB = LI()
-    dirs = (0, -1, E_PROB), (0, +1, W_PROB), (+1, 0, S_PROB), (-1, 0, N_PROB)
-    visited = {}
-    print(solve(N, dirs, visited))
+    dx = [1, -1, 0, 0]
+    dy = [0, 0, 1, -1]
+    PROB = [E_PROB, W_PROB, S_PROB, N_PROB]
+    print(solve(N, dx, dy, PROB))
 
 main()
