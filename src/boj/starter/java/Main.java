@@ -1,4 +1,4 @@
-package boj.starter;
+package boj.starter.java;
 
 import java.io.*;
 import java.util.*;
