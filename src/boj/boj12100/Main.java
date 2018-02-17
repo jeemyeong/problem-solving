@@ -1,3 +1,5 @@
+package boj.boj12100;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.BufferedWriter;
