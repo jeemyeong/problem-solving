@@ -9,8 +9,7 @@ fun main(args: Array<String>) {
     st = StringTokenizer(br.readLine())
     val N = st.nextToken().toInt()
     val M = st.nextToken().toInt()
-    val ans = solve(N, M)
-    println(ans)
+    println(N + M)
     br.close()
 }
 
