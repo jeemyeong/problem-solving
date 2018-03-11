@@ -44,28 +44,9 @@ val isBeforeThanSuccess: (Int, Submission, Map<String, IndexedSubmission>) -> Bo
         isSuccessfulUser(submission, indexedSuccessfulSubmissionMapByUserId) && index < indexedSuccessfulSubmissionMapByUserId[submission.userId]!!.index
 }
 
-class IndexedSubmission(
-        val index: Int,
-        val submission: Submission
-) {
-    override fun toString(): String {
-        return "IndexedSubmission(index=$index, submission=$submission)"
-    }
-}
+data class IndexedSubmission(val index: Int, val submission: Submission)
 
-class Submission(
-        val number: Long,
-        val userId: String,
-        val result: Int,
-        val usedMemorySize: Int,
-        val operatingTime: Int,
-        val language: Int,
-        val codeSize: Int
-) {
-    override fun toString(): String {
-        return "Submission(number=$number, userId='$userId', result=$result, usedMemorySize=$usedMemorySize, operatingTime=$operatingTime, language=$language, codeSize=$codeSize)"
-    }
-}
+data class Submission(val number: Long, val userId: String, val result: Int, val usedMemorySize: Int, val operatingTime: Int, val language: Int, val codeSize: Int)
 
 class FastScanner {
     var br = BufferedReader(InputStreamReader(System.`in`))
