@@ -20,16 +20,37 @@ fun main(args: Array<String>) {
             row[next().toInt()-1] = true
         }
     }
-    map.forEach { println(); it.forEach { print(if (it) "T\t" else "F\t") } }; println()
-    println(solve(map))
+    fun solve(): Int {
+        var visit = Array(n) {false}
+        val visited = Array(m, {-1})
+        fun dfs(i: Int): Int {
+            if (visit[i]) {
+                return 0
+            }
+            visit[i] = true
+            for (j in 0 until m) {
+                if (!map[i][j]) continue
+                if (visited[j] == -1) {
+                    visited[j] = i
+                    return 1
+                }
+                if (dfs(visited[j]) == 1) {
+                    visited[j] = i
+                    return 1
+                }
+            }
+            return 0
+        }
+        var ret = 0
+        for (i in 0 until n) {
+            visit = Array(n) {false}
+            ret += dfs(i)
+        }
+        return ret
+    }
+    println(solve())
 }
 
-fun solve(map: Array<Array<Boolean>>): Int {
-    return -1
-}
-
-//fun dfs()
-    
 class FastScanner {
     var br = BufferedReader(InputStreamReader(System.`in`))
     var st: StringTokenizer? = null
