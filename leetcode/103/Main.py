@@ -20,15 +20,13 @@ class Solution:
             stack = [(y,x)]
             while stack:
                 y, x = stack.pop()
-                if visited[y][x]:
-                    if board[y][x] == "O":
-                        return False
+                if board[y][x] == "X":
                     continue
+                if board[y][x] == "O" and visited[y][x]:
+                    return False
                 if visited_in_stack[y][x]:
                     continue
                 visited_in_stack[y][x] = True
-                if board[y][x] == "X":
-                    continue
                 for direction in directions:
                     new_y = y + direction[0]
                     new_x = x + direction[1]
