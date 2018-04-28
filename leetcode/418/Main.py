@@ -12,8 +12,6 @@ class Solution:
         start = 0
         for _ in range(rows):
             start += cols
-
-            print(start)
             if joined_sentence[start % length] == " ":
                 start += 1
             else:
