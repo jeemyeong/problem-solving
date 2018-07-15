@@ -15,7 +15,6 @@ def solve(_input):
         raise Exception("INVALID INPUT")
     lst = filter(lambda x: x != ".", _input.split("/"))
     def fn(memo, x):
-        print(memo, x)
         if x == "..":
             memo.pop()
         else:
